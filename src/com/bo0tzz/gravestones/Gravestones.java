@@ -25,11 +25,6 @@ public class Gravestones extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
     }
 
-    @Override
-    public void onDisable() {
-
-    }
-
     public static boolean doHolograms() {
         return hologramEnabled;
     }

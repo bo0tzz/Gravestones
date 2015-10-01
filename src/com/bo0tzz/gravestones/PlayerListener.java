@@ -33,8 +33,9 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onBlockBreakEvent(BlockBreakEvent event) {
-        if (gravestoneMap.containsKey(event.getBlock())) {
-            gravestoneMap.get(event.getBlock()).onBreak(event.getPlayer());
+        Gravestone gravestone = gravestoneMap.get(event.getBlock());
+        if (gravestone != null) {
+            gravestone.onBreak(event.getPlayer());
         }
     }
 
