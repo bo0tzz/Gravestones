@@ -26,8 +26,8 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerDeathEvent(PlayerDeathEvent event) {
         Gravestone gravestone = new Gravestone(event, plugin);
-        gravestoneMap.put(gravestone.getLocation(), gravestone);
-        System.out.println(("Gravestone location: " + gravestone.getLocation()));
+        gravestoneMap.put(gravestone.getBlock(), gravestone);
+        System.out.println(("Gravestone location: " + gravestone.getBlock()));
         event.getDrops().clear();
     }
 
@@ -35,7 +35,12 @@ public class PlayerListener implements Listener {
     public void onBlockBreakEvent(BlockBreakEvent event) {
         Gravestone gravestone = gravestoneMap.get(event.getBlock());
         if (gravestone != null) {
-            gravestone.onBreak(event.getPlayer());
+            if (event.getPlayer() != gravestone.getPlayer()) {
+                event.setCancelled(true);
+            } else {
+                gravestone.onBreak();
+                gravestoneMap.remove(gravestone.getBlock());
+            }
         }
     }
 

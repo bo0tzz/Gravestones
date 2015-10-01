@@ -35,21 +35,18 @@ public class Gravestone {
         } else { hologram = null; }
     }
 
-    public void onBreak(Player player) {
-        if (this.player.equals(player)) {
-            if (hologram != null) {
-                hologram.delete();
-            }
-            for (ItemStack drop : drops) {
-                location.getWorld().dropItem(location.getLocation(), drop);
-            }
-        } else {
-            player.sendMessage("This is not your grave!");
+    public void onBreak() {
+        if (hologram != null) {
+            hologram.delete();
+        }
+        for (ItemStack drop : drops) {
+            location.getWorld().dropItem(location.getLocation(), drop);
         }
     }
 
-    public Block getLocation() {
+    public Block getBlock() {
         return this.location;
     }
+    public Player getPlayer() { return this.player; }
 
 }
